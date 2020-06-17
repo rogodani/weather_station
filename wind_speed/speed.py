@@ -1,6 +1,6 @@
 from gpiozero import Button
 from time import sleep
-from .wind_speed_converter import Converter
+from .speed_converter import Converter
 
 # interval of time for which the wind speed should be recorded
 recording_interval = 5
