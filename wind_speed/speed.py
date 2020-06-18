@@ -16,7 +16,7 @@ def count_spinings():
 def calculate_wind_speed(interval):
     """Calculate the wind speed in km/h
     :param:
-        interval: recording interval for winf speed in seconds
+        interval: recording interval for wind speed in seconds
     :return:
         wind speed in km/h
     """
