@@ -9,3 +9,17 @@ def voltage_divider(r1, r2, vin):
 
 for x in range(len(resistance)):
     print(resistance[x], voltage_divider(10000, resistance[x], 3.3))
+
+from gpiozero import MCP3008
+import time
+adc = MCP3008(channel=0)
+
+count = 0
+values = []
+
+while True:
+    wind = round(adc.value *3.3, 1)
+    if not wind in values:
+        values.append(wind)
+        count += 1
+        print(count)
