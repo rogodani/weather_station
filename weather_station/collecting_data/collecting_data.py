@@ -98,6 +98,11 @@ class CollectingData:
                                     rain_qty REAL NOT NULL);'''.format(table))
         print("weather_data table created")
 
+    def insert_data(self, values):
+        print("Inserting new values ...")
+        self.execute_psql_command('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction, 
+        rain_qty) VALUES {}''' % (self._db_data_table,values))
+
 
 if __name__ == '__main__':
     DB = CollectingData()
