@@ -4,7 +4,7 @@ Used for connecting to the DB and execute different commands
 
 from time import time
 import psycopg2
-from weather_station.tools import SetupParser
+from ..tools.setupparser import SetupParser
 
 
 class CollectingData:
