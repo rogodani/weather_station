@@ -100,9 +100,7 @@ class CollectingData:
 
     def insert_data(self, values):
         print("Inserting new values ...")
-        # self.execute_psql_command('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction,
-        # rain_qty) VALUES {}''' % (self._db_data_table,values))
-        print('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction, 
+        self.execute_psql_command('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction, 
         rain_qty) VALUES {}'''.format(self._db_data_table,values))
 
 
