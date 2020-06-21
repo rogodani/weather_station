@@ -24,7 +24,7 @@ class Speed:
             sleep(self.recording_interval)
             print("{0:.2f} km/h - {1:.2f} m/s".format(self.calculate_wind_speed))
 
+
 if __name__ == '__main__':
     X = Speed()
     Speed.run()
-
