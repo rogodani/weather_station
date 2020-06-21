@@ -1,6 +1,6 @@
 from gpiozero import Button
 from time import sleep
-from tools.setupparser import SetupParser
+from weather_station.tools.setupparser import SetupParser
 
 
 class Speed:
