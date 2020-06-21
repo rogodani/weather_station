@@ -1,12 +1,10 @@
 from configparser import ConfigParser
-import os
 
 
 class SetupParser:
 
     def __init__(self, section, filename="setup.ini"):
-        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
-        self.filename = config_path
+        self.filename = filename
         self.section = section
 
     def get_param(self):
