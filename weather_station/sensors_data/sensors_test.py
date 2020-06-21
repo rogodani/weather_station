@@ -26,4 +26,4 @@ class SensorsData:
             sleep(self.recording_interval)
             wind_speed = self.calculate_wind_speed()
             print("{0:.2f} km/h".format(wind_speed))
-            CollectingData().insert_data((wind_speed,1,1,"N",1))
+            CollectingData().insert_data((datetime.now().isoformat(),wind_speed,1,1,"N",1))
