@@ -27,4 +27,5 @@ while True:
         values.append(wind)
         count += 1
         print(count)
+    print(values)
 
