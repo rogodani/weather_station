@@ -1,1 +1,1 @@
-import weather_station
+from weather_station import *
