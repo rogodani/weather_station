@@ -90,12 +90,12 @@ class CollectingData:
         """
         print("Generating {} table ...".format(table))
         self.execute_psql_command('''CREATE TABLE {}
-                                    (date DATE PRIMARY KEY NOT NULL,
-                                    speed REAL NOT NULL,
-                                    direction_degrees REAL NOT NULL,
-                                    direction_voltage REAL NOT NULL,
-                                    direction CHAR(4) NOT NULL,
-                                    rain_qty REAL NOT NULL);'''.format(table))
+                                    (date timestamp(4) without time zone PRIMARY KEY NOT NULL,
+                                    speed real NOT NULL,
+                                    direction_degrees real NOT NULL,
+                                    direction_voltage real NOT NULL,
+                                    direction character(4) NOT NULL,
+                                    rain_qty real NOT NULL);'''.format(table))
         print("weather_data table created")
 
     def insert_data(self, values):
