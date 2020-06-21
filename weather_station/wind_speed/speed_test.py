@@ -6,7 +6,7 @@ from weather_station.tools.setupparser import SetupParser
 class Speed:
 
     def __init__(self):
-        self.recording_interval = SetupParser("collecting_data").get_param()["interval"]
+        self.recording_interval = int(SetupParser("collecting_data").get_param()["interval"])
         self.half_spin_count = 0
         self.wind_speed_sensor = Button(5)
         self.wind_speed_sensor.when_pressed = self.count_spinning
