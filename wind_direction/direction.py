@@ -5,12 +5,12 @@ resistance = [33000, 6570, 8200, 891,
 
 
 def voltage_divider(r1, r2, vin):
-    vout = (vin * r1) / (r1 + r2)
-    return round(vout, 3)
+    vout = (vin * r2) / (r1 + r2)
+    return round(vout, 1)
 
 
 for x in range(len(resistance)):
-    print(resistance[x], voltage_divider(10000, resistance[x], 3.3))
+    print(resistance[x], voltage_divider(resistance[x], 4700, 3.3))
 
 from gpiozero import MCP3008
 import time
@@ -27,3 +27,4 @@ while True:
         values.append(wind)
         count += 1
         print(count)
+
