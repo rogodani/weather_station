@@ -7,8 +7,9 @@ CollectingData()._db_checkup()
 # Speed().run()
 
 while True:
-    Speed.half_spin_count = 0
+    x = Speed()
+    x.half_spin_count = 0
     sleep(5)
-    print("{0:.2f} km/h".format(Speed.calculate_wind_speed()))
+    print("{0:.2f} km/h".format(x.calculate_wind_speed()))
 
 CollectingData.insert_data(datetime.now().isoformat(1, 1, 1, "N", 1))
