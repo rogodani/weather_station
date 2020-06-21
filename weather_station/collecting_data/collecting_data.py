@@ -14,7 +14,7 @@ class CollectingData:
 
     def __init__(self):
         self.connect = None
-        self._db_conection_params = SetupParser("postgresql").get_param()
+        self._db_connection_params = SetupParser("postgresql").get_param()
         self._db_data_table = SetupParser("db_data_table").get_param()["table"]
 
     def _db_connection(self):
@@ -24,7 +24,7 @@ class CollectingData:
         try:
             print("Connecting to the PostgreSQL database...")
             start_time = time()
-            self.connect = psycopg2.connect(**self._db_conection_params)
+            self.connect = psycopg2.connect(**self._db_connection_params)
             print("Connection time: {:.2f} sec".format(time() - start_time))
             print("Database connection successfully")
         except psycopg2.Error as error:
@@ -100,7 +100,9 @@ class CollectingData:
 
     def insert_data(self, values):
         print("Inserting new values ...")
-        self.execute_psql_command('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction, 
+        # self.execute_psql_command('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction,
+        # rain_qty) VALUES {}''' % (self._db_data_table,values))
+        print('''INSERT INTO {} (date, speed, direction_degrees, direction_voltage, direction, 
         rain_qty) VALUES {}''' % (self._db_data_table,values))
 
 

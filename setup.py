@@ -1,15 +1,5 @@
 from weather_station.collecting_data.collecting_data import CollectingData
-from weather_station.wind_speed.speed_test import Speed
-from datetime import datetime
-from time import sleep
+from weather_station.sensors_data.sensors_test import SensorsData
 
 CollectingData()._db_checkup()
-# Speed().run()
-
-while True:
-    x = Speed()
-    x.half_spin_count = 0
-    sleep(5)
-    print("{0:.2f} km/h".format(x.calculate_wind_speed()))
-
-CollectingData.insert_data(datetime.now().isoformat(1, 1, 1, "N", 1))
+SensorsData().run()

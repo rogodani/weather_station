@@ -2,9 +2,10 @@ from gpiozero import Button
 from time import sleep
 from weather_station.tools.setupparser import SetupParser
 from weather_station.collecting_data.collecting_data import CollectingData
+from datetime import datetime
 
 
-class Speed:
+class SensorsData:
 
     def __init__(self):
         self.recording_interval = int(SetupParser("collecting_data").get_param()["interval"])
@@ -23,9 +24,6 @@ class Speed:
         while True:
             self.half_spin_count = 0
             sleep(self.recording_interval)
-            print("{0:.2f} km/h".format(self.calculate_wind_speed()))
-
-
-if __name__ == '__main__':
-    X = Speed()
-    Speed.run()
+            wind_speed = self.calculate_wind_speed()
+            print("{0:.2f} km/h".format(wind_speed))
+            CollectingData().insert_data((wind_speed,1,1,"N",1))
