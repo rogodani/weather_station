@@ -22,7 +22,7 @@ class Speed:
         while True:
             self.half_spin_count = 0
             sleep(self.recording_interval)
-            print("{0:.2f} km/h - {1:.2f} m/s".format(self.calculate_wind_speed))
+            print("{0:.2f} km/h - {1:.2f} m/s".format(self.calculate_wind_speed()))
 
 
 if __name__ == '__main__':
