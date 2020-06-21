@@ -32,6 +32,9 @@ class SensorsData:
         self.WIND_SPEED_SENSOR = Button(5)
         self.WIND_SPEED_SENSOR.when_pressed = self.count_spinning
         self.ADC = MCP3008(channel=0)
+        self.wind_direction_degrees = 0
+        self.wind_direction_voltage = 0
+        self.wind_direction = "N"
 
     def count_spinning(self):
         """Count the number of half spins"""
@@ -40,12 +43,19 @@ class SensorsData:
     def calculate_wind_speed(self):
         return self.half_spin_count / self.RECORDING_INTERVAL / 2.0 * 2.4
 
+    def find_wind_direction(self):
+        wind_direction_volts = round(self.ADC.value * 3.3, 1)
+        print(wind_direction_volts)
+        if wind_direction_volts in VOLTS.keys():
+            self.wind_direction_degrees = VOLTS[wind_direction_volts][1]
+            self.wind_direction_voltage = wind_direction_volts
+            self.wind_direction = VOLTS[wind_direction_volts][2]
+
     def run(self):
         while True:
             self.half_spin_count = 0
             sleep(self.RECORDING_INTERVAL)
             wind_speed = self.calculate_wind_speed()
             print("{0:.2f} km/h".format(wind_speed))
-            wind_direction_volts = round(self.ADC.value * 3.3, 1)
-            print(wind_direction_volts)
-            CollectingData().insert_data((datetime.now().isoformat(),wind_speed,1,1,"N",1))
+            self.find_wind_direction()
+            CollectingData().insert_data((datetime.now().isoformat(),wind_speed,self.wind_direction_degrees,self.wind_direction_voltage,self.wind_direction,1))
