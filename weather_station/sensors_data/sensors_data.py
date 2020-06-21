@@ -51,7 +51,6 @@ class SensorsData:
 
     def find_wind_direction(self):
         wind_direction_volts = round(self.wind_direction_sensor.value * 3.3, 1)
-        print(wind_direction_volts)
         if wind_direction_volts in VOLTS.keys():
             self.wind_direction_degrees = VOLTS[wind_direction_volts][1]
             self.wind_direction_voltage = wind_direction_volts
@@ -61,14 +60,17 @@ class SensorsData:
         self.rain_bucket_tipped_count += 1
 
     def rain_qty(self):
-        return round(self.rain_bucket_tipped_count * RAIN_BUCKET_SIZE, 2)
+        return round(self.rain_bucket_tipped_count * RAIN_BUCKET_SIZE / RECORDING_INTERVAL, 2)
+
+    def reset_wind_and_rain(self):
+        self.wind_vane_spin_count = 0
+        self.rain_bucket_tipped_count = 0
 
     def run(self):
         while True:
-            self.wind_vane_spin_count = 0
+            self.reset_wind_and_rain()
             sleep(RECORDING_INTERVAL)
-            wind_speed = self.calculate_wind_speed()
-            print("{0:.2f} km/h".format(wind_speed))
             self.find_wind_direction()
-
-            CollectingData().insert_data((datetime.now().isoformat(),wind_speed,self.wind_direction_degrees,self.wind_direction_voltage,self.wind_direction,1))
+            CollectingData().insert_data((datetime.now().isoformat(), self.calculate_wind_speed(),
+                                          self.wind_direction_degrees, self.wind_direction_voltage,
+                                          self.wind_direction, self.rain_qty()))
