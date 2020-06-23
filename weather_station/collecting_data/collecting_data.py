@@ -2,7 +2,7 @@
 Used for connecting to the DB and execute different commands
 """
 
-from time import time
+from time import time, sleep
 from datetime import datetime
 import psycopg2
 from ..tools.setupparser import SetupParser
@@ -36,6 +36,7 @@ class CollectingData:
                 print("Error while connecting to PostgreSQL", error)
                 print("Retry no {}".format(retry))
                 retry += 1
+                sleep(30)
 
     def _close_connection(self):
         """
