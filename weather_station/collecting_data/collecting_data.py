@@ -31,6 +31,7 @@ class CollectingData:
                 self.connect = psycopg2.connect(**self._db_connection_params)
                 print("Connection time: {:.2f} sec".format(time() - start_time))
                 print("Database connection successfully")
+                break
             except psycopg2.Error as error:
                 print("Error while connecting to PostgreSQL", error)
                 print("Retry no {}".format(retry))
