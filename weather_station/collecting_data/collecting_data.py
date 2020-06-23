@@ -22,15 +22,19 @@ class CollectingData:
         """
         Initiate the DB connection
         """
-        try:
-            print(datetime.now().isoformat())
-            print("Connecting to the PostgreSQL database...")
-            start_time = time()
-            self.connect = psycopg2.connect(**self._db_connection_params)
-            print("Connection time: {:.2f} sec".format(time() - start_time))
-            print("Database connection successfully")
-        except psycopg2.Error as error:
-            print("Error while connecting to PostgreSQL", error)
+        retry = 1
+        while retry < 4:
+            try:
+                print(datetime.now().isoformat())
+                print("Connecting to the PostgreSQL database...")
+                start_time = time()
+                self.connect = psycopg2.connect(**self._db_connection_params)
+                print("Connection time: {:.2f} sec".format(time() - start_time))
+                print("Database connection successfully")
+            except psycopg2.Error as error:
+                print("Error while connecting to PostgreSQL", error)
+                print("Retry no {}".format(retry))
+                retry += 1
 
     def _close_connection(self):
         """
