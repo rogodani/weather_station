@@ -23,7 +23,7 @@ class CollectingData:
         Initiate the DB connection
         """
         try:
-            print(datetime.time().isoformat())
+            print(datetime.now().isoformat())
             print("Connecting to the PostgreSQL database...")
             start_time = time()
             self.connect = psycopg2.connect(**self._db_connection_params)
