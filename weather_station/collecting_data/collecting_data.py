@@ -6,6 +6,7 @@ from time import time, sleep
 from datetime import datetime
 import psycopg2
 from ..tools.setupparser import SetupParser
+import socket
 
 
 class CollectingData:
@@ -23,20 +24,26 @@ class CollectingData:
         Initiate the DB connection
         """
         retry = 1
+        connection_params = self._db_connection_params
         while retry < 4:
             try:
                 print(datetime.now().isoformat())
                 print("Connecting to the PostgreSQL database...")
+                print("Host used for connection: {}". format_map(connection_params["host"]))
                 start_time = time()
-                self.connect = psycopg2.connect(**self._db_connection_params)
+                self.connect = psycopg2.connect(**connection_params)
                 print("Connection time: {:.2f} sec".format(time() - start_time))
                 print("Database connection successfully")
                 break
             except psycopg2.Error as error:
                 print("Error while connecting to PostgreSQL", error)
                 print("Retry no {}".format(retry))
+                if retry % 2 == 1:
+                    connection_params["host"] = socket.gethostbyname(socket.gethostname())
+                else:
+                    connection_params["host"] = self._db_connection_params["host"]
                 retry += 1
-                sleep(30)
+                sleep(5)
 
     def _close_connection(self):
         """
