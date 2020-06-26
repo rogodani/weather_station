@@ -23,9 +23,9 @@ class CollectingData:
         """
         Initiate the DB connection
         """
-        retry = 10
+        retry = 1
         connection_params = self._db_connection_params
-        while retry < 4:
+        while retry < 10:
             try:
                 print(datetime.now().isoformat())
                 print("Connecting to the PostgreSQL database...")
