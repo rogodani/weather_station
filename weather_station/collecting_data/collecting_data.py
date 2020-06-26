@@ -29,7 +29,7 @@ class CollectingData:
             try:
                 print(datetime.now().isoformat())
                 print("Connecting to the PostgreSQL database...")
-                print("Host used for connection: {}".format_map(connection_params["host"]))
+                print("Host used for connection: {}".format(connection_params["host"]))
                 start_time = time()
                 self.connect = psycopg2.connect(**connection_params)
                 print("Connection time: {:.2f} sec".format(time() - start_time))
