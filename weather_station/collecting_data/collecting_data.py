@@ -23,7 +23,7 @@ class CollectingData:
         """
         Initiate the DB connection
         """
-        retry = 1
+        retry = 10
         connection_params = self._db_connection_params
         while retry < 4:
             try:
