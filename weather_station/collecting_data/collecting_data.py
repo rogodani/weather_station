@@ -39,7 +39,11 @@ class CollectingData:
                 print("Error while connecting to PostgreSQL", error)
                 print("Retry no {}".format(retry))
                 if retry % 2 == 1:
-                    connection_params["host"] = socket.gethostbyname(socket.gethostname())
+                    try:
+                        connection_params["host"] = socket.gethostbyname(socket.gethostname())
+                    except socket.gaierror as error:
+                        print(error)
+                        sleep(10)
                 else:
                     connection_params["host"] = self._db_connection_params["host"]
                 retry += 1
